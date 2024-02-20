@@ -38,7 +38,6 @@ export async function loadS3IntoPinecone(fileKey: string) {
 
   // 3. vectorise and embed individual documents
   const vectors = await Promise.all(documents.flat().map(embedDocument));
-
   // 4. upload to pinecone
   const client = await getPineconeClient();
   const pineconeIndex = await client.index("talk-doc");
