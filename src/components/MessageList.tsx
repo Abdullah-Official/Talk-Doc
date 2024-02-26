@@ -18,7 +18,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
   }
   if (!messages) return <></>;
   return (
-    <div className="flex flex-col gap-2 px-4">
+    <div className="flex flex-col gap-y-4 px-4">
       {messages.map((message) => {
         return (
           <div
@@ -36,7 +36,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
                 }
               )}
             >
-              <p>{message.content}</p>
+              <p className="py-2 px-1">{message.content}</p>
             </div>
           </div>
         );

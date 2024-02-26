@@ -3,7 +3,7 @@ import React from "react";
 import { Input } from "./ui/input";
 import { useChat } from "ai/react";
 import { Button } from "./ui/button";
-import { Send } from "lucide-react";
+import { Loader2, Send } from "lucide-react";
 import MessageList from "./MessageList";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -22,7 +22,7 @@ const ChatComponent = ({ chatId }: Props) => {
     },
   });
 
-  const { input, handleInputChange, handleSubmit, messages } = useChat({
+  const { input, handleInputChange, handleSubmit, messages, isLoading: isWaiting } = useChat({
     api: "/api/chat",
     body: {
       chatId,
@@ -49,7 +49,7 @@ const ChatComponent = ({ chatId }: Props) => {
       </div>
 
       {/* message list */}
-      <MessageList messages={messages} isLoading={isLoading} />
+      <MessageList messages={messages} isLoading={isLoading}  />
 
       <form
         onSubmit={handleSubmit}
@@ -62,8 +62,9 @@ const ChatComponent = ({ chatId }: Props) => {
             placeholder="Ask any question..."
             className="w-full"
           />
-          <Button className="bg-blue-600 ml-2">
-            <Send className="h-4 w-4" />
+          <Button disabled={isWaiting} className="bg-blue-600 ml-2">
+            {isWaiting ? <Loader2 className="w-4 h-4 text-white animate-spin" /> : <Send className="h-4 w-4" />}
+            
           </Button>
         </div>
       </form>
