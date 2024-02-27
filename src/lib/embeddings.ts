@@ -13,6 +13,6 @@ export async function getEmbeddings(text: string) {
     return response.data[0].embedding as number[];
   } catch (error) {
     console.log("error calling openai embeddings api", error);
-    throw error;
+    throw error
   }
 }
